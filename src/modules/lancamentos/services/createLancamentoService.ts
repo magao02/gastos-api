@@ -20,11 +20,14 @@ class CreateLancamentoService {
     if (!empresa) {
       throw new AppError('Empresa not found', 404);
     }
+    const dateString = data.data; // "2024-08-24T00:00:00.000Z"
+    const localDate = new Date(dateString);
+    const formattedDate = localDate.toISOString().split('T')[0];
 
     const lancamento = lancamentosRepository.create({
       descricao: data.descricao,
       valor: data.valor,
-      data: data.data,
+      data: formattedDate,
       tipo: data.tipo,
       comprovante: data.comprovante,
       empresa,

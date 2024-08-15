@@ -2,7 +2,6 @@ import { Router } from 'express';
 import EmpresasController from '../controllers/empresasController';
 import isAuthenticated from '@modules/users/middlewares/isAuthenticated';
 import isAuthorized from '@modules/users/middlewares/isAuthorized';
-
 const empresasRoutes = Router();
 const empresasController = new EmpresasController();
 

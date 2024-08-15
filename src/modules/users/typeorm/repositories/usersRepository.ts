@@ -8,7 +8,7 @@ export const UsersRepository = dataSource.getRepository(User).extend({
   },
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = this.findOne({ where: { email } });
+    const user = this.findOne({ where: { email }, relations: ['empresas'] });
     return user;
   },
 

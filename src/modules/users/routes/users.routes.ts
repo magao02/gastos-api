@@ -191,8 +191,8 @@ usersRouter.get(
  */
 usersRouter.post(
   '/',
-  //isAuthenticated,
-  //isAuthorized('admin'),
+  isAuthenticated,
+  isAuthorized('admin'),
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),

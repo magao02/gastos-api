@@ -29,7 +29,7 @@ class EmpresasController {
       usuario,
       estado,
     });
-    return res.json(empresa);
+    return res.status(201).json(empresa);
   }
 
   async update(req: Request, res: Response) {

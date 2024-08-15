@@ -16,7 +16,9 @@ class Lancamento {
   @Column()
   descricao: string;
 
-  @Column()
+  @Column({
+    type: 'float',
+  })
   valor: number;
 
   @Column()

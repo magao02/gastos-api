@@ -26,7 +26,7 @@ class LancamentosController {
       comprovante,
     });
 
-    return res.json(lancamento);
+    return res.status(201).json(lancamento);
   }
 
   async update(req: Request, res: Response) {
