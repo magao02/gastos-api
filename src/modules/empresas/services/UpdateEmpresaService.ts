@@ -2,6 +2,7 @@ import GetUserService from '@modules/users/services/getUserService';
 import Empresa from '../typeorm/entities/empresa';
 import EmpresaRepository from '../typeorm/repositories/empresasRepository';
 import AppError from '@shared/errors/appError';
+import RedisCache from '@shared/cache/RedisCache';
 
 interface updateEmpresaDTO {
   id: string;
@@ -21,6 +22,7 @@ class UpdateEmpresaService {
   }: updateEmpresaDTO): Promise<Empresa> {
     const empresasRepository = EmpresaRepository;
     const getUserService = new GetUserService();
+    const redisCache = new RedisCache();
 
     const empresa = await empresasRepository.findById(id);
     if (!empresa) {
@@ -38,6 +40,8 @@ class UpdateEmpresaService {
     empresa.usuario = user;
 
     await empresasRepository.save(empresa);
+
+    redisCache.invalidate('empresas');
 
     return empresa;
   }
