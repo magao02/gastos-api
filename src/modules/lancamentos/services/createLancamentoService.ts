@@ -1,3 +1,4 @@
+import RedisCache from '@shared/cache/RedisCache';
 import Lancamento from '../typeorm/entities/lancamento';
 import { DescricaoRepository } from '../typeorm/repositories/descricaoRepository';
 import { LancamentoRepository } from '../typeorm/repositories/lancamentosRepository';
@@ -18,6 +19,7 @@ class CreateLancamentoService {
     const lancamentosRepository = LancamentoRepository;
     const descricaoRepository = DescricaoRepository;
     const getEmpresaService = new GetEmpresaService();
+    const redisCache = new RedisCache();
     const empresa = await getEmpresaService.executeExists(data.empresaId);
 
     if (!empresa) {
@@ -52,6 +54,8 @@ class CreateLancamentoService {
     });
 
     await lancamentosRepository.save(lancamento);
+
+    redisCache.invalidate(`lancamentos-${data.empresaId}`);
 
     return lancamento;
   }

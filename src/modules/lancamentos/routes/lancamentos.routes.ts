@@ -2,7 +2,7 @@ import { Router } from 'express';
 import uploadConfig from '@config/upload';
 import { celebrate, Joi, Segments } from 'celebrate';
 import multer from 'multer';
-//import isAuthenticated from '@modules/users/middlewares/isAuthenticated';
+import isAuthenticated from '@modules/users/middlewares/isAuthenticated';
 import LancamentosController from '../controllers/lancamentosController';
 import DescricaoController from '../controllers/descricaoController';
 
@@ -13,6 +13,7 @@ const upload = multer(uploadConfig);
 
 lancamentosRouter.get(
   '/:empresaId',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       empresaId: Joi.string().uuid().required(),
@@ -22,6 +23,7 @@ lancamentosRouter.get(
 );
 lancamentosRouter.get(
   '/descricao/:empresaId',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       empresaId: Joi.string().uuid().required(),
@@ -32,6 +34,7 @@ lancamentosRouter.get(
 
 lancamentosRouter.post(
   '/',
+  isAuthenticated,
   upload.single('comprovante'),
   celebrate({
     [Segments.BODY]: {
@@ -48,6 +51,7 @@ lancamentosRouter.post(
 
 lancamentosRouter.patch(
   '/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
@@ -58,6 +62,7 @@ lancamentosRouter.patch(
 
 lancamentosRouter.delete(
   '/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
