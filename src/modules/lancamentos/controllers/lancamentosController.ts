@@ -14,7 +14,7 @@ class LancamentosController {
   }
 
   async create(req: Request, res: Response) {
-    const { descricao, valor, data, tipo, empresaId } = req.body;
+    const { descricao, valor, data, tipo, empresaId, banco } = req.body;
     const comprovante = req.file?.filename;
     const createLancamentoService = new CreateLancamentoService();
     const lancamento = await createLancamentoService.execute({
@@ -24,6 +24,7 @@ class LancamentosController {
       tipo,
       empresaId,
       comprovante,
+      banco,
     });
 
     return res.status(201).json(lancamento);

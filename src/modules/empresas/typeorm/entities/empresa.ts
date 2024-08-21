@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import User from '@modules/users/typeorm/entities/user';
 import Lancamento from '@modules/lancamentos/typeorm/entities/lancamento';
+import Descricao from '@modules/lancamentos/typeorm/entities/descricao';
 
 @Entity('Empresas')
 class Empresa {
@@ -29,6 +30,9 @@ class Empresa {
     nullable: true,
   })
   lancamentos: Lancamento[];
+
+  @OneToMany(() => Descricao, descricao => descricao.empresa)
+  descricoes: Descricao[];
 
   @Column({ default: true })
   isActive: boolean;

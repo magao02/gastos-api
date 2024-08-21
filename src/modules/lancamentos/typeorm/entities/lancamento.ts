@@ -7,14 +7,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import Descricao from './descricao';
 
 @Entity('lancamentos')
 class Lancamento {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
-  @Column()
-  descricao: string;
 
   @Column({
     type: 'float',
@@ -25,13 +23,19 @@ class Lancamento {
   data: Date;
 
   @Column()
-  tipo: 'receita' | 'despesa';
+  tipo: 'recebimento' | 'despesa';
+
+  @Column()
+  banco: string;
 
   @Column({ nullable: true })
   comprovante: string;
 
   @ManyToOne(() => Empresa, empresa => empresa.lancamentos)
   empresa: Empresa;
+
+  @ManyToOne(() => Descricao, descricao => descricao.lancamentos)
+  descricao: Descricao;
 
   @CreateDateColumn()
   created_at: Date;

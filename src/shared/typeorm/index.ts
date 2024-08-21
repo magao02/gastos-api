@@ -1,4 +1,5 @@
 import Empresa from '@modules/empresas/typeorm/entities/empresa';
+import Descricao from '@modules/lancamentos/typeorm/entities/descricao';
 import Lancamento from '@modules/lancamentos/typeorm/entities/lancamento';
 import User from '@modules/users/typeorm/entities/user';
 import * as dotenv from 'dotenv';
@@ -13,5 +14,5 @@ export const dataSource: DataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   synchronize: true,
-  entities: [User, Empresa, Lancamento],
+  entities: [User, Empresa, Lancamento, Descricao],
 });

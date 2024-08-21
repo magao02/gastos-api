@@ -16,7 +16,7 @@ export const LancamentoRepository = dataSource
     async findByEmpresaId(empresaId: string): Promise<Lancamento[]> {
       const lancamentos = this.find({
         where: { empresa: { id: empresaId } },
-        relations: ['empresa'],
+        relations: ['empresa', 'descricao'],
       });
       return lancamentos;
     },
