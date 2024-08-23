@@ -1,5 +1,6 @@
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
@@ -36,6 +37,9 @@ class Empresa {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @DeleteDateColumn()
+  deletedAt: Date | null;
 }
 
 export default Empresa;

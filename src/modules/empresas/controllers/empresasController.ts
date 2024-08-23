@@ -3,6 +3,7 @@ import GetEmpresaService from '../services/getEmpresaService';
 import GetEmpresasService from '../services/getEmpresasService';
 import CreateEmpresaService from '../services/createEmpresaService';
 import UpdateEmpresaService from '../services/UpdateEmpresaService';
+import DeleteEmpresaService from '../services/DeleteEmpresaService';
 
 class EmpresasController {
   async index(req: Request, res: Response) {
@@ -44,6 +45,13 @@ class EmpresasController {
       estado,
     });
     return res.json(empresa);
+  }
+
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
+    const deleteEmpresaService = new DeleteEmpresaService();
+    await deleteEmpresaService.execute(id);
+    return res.status(204).send();
   }
 }
 

@@ -25,4 +25,11 @@ empresasRoutes.put(
   empresasController.update,
 );
 
+empresasRoutes.delete(
+  '/:id',
+  isAuthenticated,
+  isAuthorized('admin'),
+  empresasController.delete,
+);
+
 export default empresasRoutes;
